@@ -25,8 +25,40 @@ app.post('/', (req, res) => {
     res.status(201).json({ message: `Data received: ${data.name}` });
 });
 
-
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// GET /products  получаем все продукты
+app.get("/products", (req, res) => {
+    const sql = "SELECT * FROM products";
+    db.query(sql, (err, results) => {
+        if (err) {
+        return res.status(500).json({ error: 'Error receiving products' });
+        }
+        res.json(results);
+    });
 });
 
+// POST добавление продукта /products
+app.post('/products', (req, res) => {
+    const { name, price } = req.body;
+
+    if (!name || !price) {
+        return res.status(400).json({ error: 'Fields are required' });
+    }
+
+    db.query(
+    'INSERT INTO products (name, price) VALUES (?, ?)',
+    [name, price],
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: 'Error adding product' });
+      }
+      res.status(201).json({
+        message: 'Products added successfully',
+        productId: result.insertId
+      });
+    }
+  );
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on: http://localhost:${PORT}`);
+});
