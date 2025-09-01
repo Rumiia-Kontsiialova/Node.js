@@ -3,7 +3,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
-// const PORT = process.env.PORT || 3001;
+dotenv.config();
+
+const PORT = process.env.PORT;
 
 // Создаем приложение Express
 const app = express();
@@ -64,8 +66,8 @@ app.post('/products', (req, res) => {
 
 
 // Запуск сервера на порту 3000
-app.listen(3000, () => {
+app.listen(PORT, () => {
 
-  console.log(`Server is running on http://localhost:3000`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 
 });
