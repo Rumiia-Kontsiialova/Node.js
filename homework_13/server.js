@@ -1,4 +1,6 @@
 import express from 'express';
+import Publischer from './models/Publicsher.js';
+import Magazine from './models/Magazine.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,6 +18,6 @@ app.listen(PORT, async () => {
         await connectToDatabase();
         console.log(`Server running on http://localhost:${PORT}`);
     } catch (error) {
-        console.error('Error connecting server: ', error)
+        console.error('Error connecting server: ', error);
     }
 });
