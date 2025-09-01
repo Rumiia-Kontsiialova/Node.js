@@ -1,6 +1,9 @@
 import express from 'express';
+import connectToDatabase from './config/db.js';
 import Publischer from './models/Publicsher.js';
 import Magazine from './models/Magazine.js';
+import Tag from './models/Tag.js';
+import Article from './models/Article.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
